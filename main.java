@@ -1,19 +1,28 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class main {
+public class four {
 	public static String[] remove(String[] StringArr, String elem) {
-		for(int i = 0; i < StringArr.length; i++){
-            if(StringArr[i] == elem){
-                // shifting elements
-                for(int j = i; j < StringArr.length - 1; j++){
-                    StringArr[j] = StringArr[j+1];
-                }
-                break;
-            }
-        }
+		for (int i = 0; i < StringArr.length; i++) {
+			if (StringArr[i] == elem) {
+				// shifting elements
+				for (int j = i; j < StringArr.length - 1; j++) {
+					StringArr[j] = StringArr[j + 1];
+				}
+				break;
+			}
+		}
 		return StringArr;
 	}
+
+	static String[] removeAt(int k, String[] arr) {
+		final int L = arr.length;
+		String[] ret = new String[L - 1];
+		System.arraycopy(arr, 0, ret, 0, k);
+		System.arraycopy(arr, k + 1, ret, k, L - k - 1);
+		return ret;
+	}
+
 	public static void main(String args[]) {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Please input the math problem: ");
@@ -25,29 +34,31 @@ public class main {
 				if (group[a] instanceof String) {
 					switch (group[a]) {
 					case "*":
-						result = Integer.parseInt(group[a - 1])*Integer.parseInt(group[a + 1]);
-						group[a]=String.valueOf(result);
-						remove(group,group[a-1]);
-						remove(group,group[a+1]);
+						result = Integer.parseInt(group[a - 1]) * Integer.parseInt(group[a + 1]);
+						group = removeAt(a - 1, group);
+						group = removeAt(a, group);
+						group[a - 1] = String.valueOf(result);
 						result = Integer.parseInt(group[0]);
-						System.out.println(a);
-						a=0;
+						System.out.println(Arrays.toString(group));
+						a = 0;
 						break;
 					case "/":
-						result = Integer.parseInt(group[a - 1])/Integer.parseInt(group[a + 1]);
-						remove(group,group[a-1]);
-						remove(group,group[a+1]);
-						group[a]=String.valueOf(result);
+						result = Integer.parseInt(group[a - 1]) / Integer.parseInt(group[a + 1]);
+						group = removeAt(a - 1, group);
+						group = removeAt(a, group);
+						group[a - 1] = String.valueOf(result);
 						result = Integer.parseInt(group[0]);
-						a=0;
+						System.out.println(Arrays.toString(group));
+						a = 0;
 						break;
 					case "%":
-						result = Integer.parseInt(group[a - 1])%Integer.parseInt(group[a + 1]);
-						remove(group,group[a-1]);
-						remove(group,group[a+1]);
-						group[a]=String.valueOf(result);
+						result = Integer.parseInt(group[a - 1]) % Integer.parseInt(group[a + 1]);
+						group = removeAt(a - 1, group);
+						group = removeAt(a, group);
+						group[a - 1] = String.valueOf(result);
 						result = Integer.parseInt(group[0]);
-						a=0;
+						System.out.println(Arrays.toString(group));
+						a = 0;
 						break;
 					case "+":
 						result += Integer.parseInt(group[a + 1]);
@@ -58,11 +69,11 @@ public class main {
 					default:
 						break;
 					}
-					
+
 				}
-				
-			} 
-			
+
+			}
+
 		}
 		System.out.println("The result is: " + result);
 	}
