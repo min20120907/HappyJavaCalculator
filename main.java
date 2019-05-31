@@ -1,20 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class four {
-	public static String[] remove(String[] StringArr, String elem) {
-		for (int i = 0; i < StringArr.length; i++) {
-			if (StringArr[i] == elem) {
-				// shifting elements
-				for (int j = i; j < StringArr.length - 1; j++) {
-					StringArr[j] = StringArr[j + 1];
-				}
-				break;
-			}
-		}
-		return StringArr;
-	}
-
+public class main {
 	static String[] removeAt(int k, String[] arr) {
 		final int L = arr.length;
 		String[] ret = new String[L - 1];
