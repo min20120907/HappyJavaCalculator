@@ -59,6 +59,19 @@ public class main {
 
 				}
 
+			} else {
+				if (group[a] instanceof String) {
+					switch (group[a]) {
+					case "+":
+						result += Integer.parseInt(group[a + 1]);
+						break;
+					case "-":
+						result -= Integer.parseInt(group[a + 1]);
+						break;
+					default:
+						break;
+					}
+				}
 			}
 
 		}
